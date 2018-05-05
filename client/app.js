@@ -5,12 +5,16 @@ import App from './views/App.jsx'     //eslint-disable-line
 import {
     BrowserRouter as Router
 } from 'react-router-dom'
+import { Provider } from 'mobx-react'
+import appState from './store/app-state'
 
 const root = document.getElementById('root');
 const render = (Component) => {
   ReactDOM.render(
       <AppContainer>
-         <Router><Component /></Router>
+          <Provider appState={appState}>
+              <Router><Component /></Router>
+          </Provider>
       </AppContainer>, root)
 }
 render(App);

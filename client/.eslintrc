@@ -15,9 +15,10 @@
     "semi": [0],
     "linebreak-style":"warn",
     "react/jsx-filename-extension":[0],
-      "indent":"warn",
+      "indent": [0],
       "import/extensions":"warn",
       "react/jsx-indent":[0],
-      "no-unused-vars":"warn"
+      "no-unused-vars":"warn",
+      "no-multiple-empty-lines":[0]
   }
 }
