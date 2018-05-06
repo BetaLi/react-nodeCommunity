@@ -3,25 +3,25 @@ import ReactDOM from 'react-dom'
 import { AppContainer } from 'react-hot-loader'  //eslint-disable-line
 import App from './views/App.jsx'     //eslint-disable-line
 import {
-    BrowserRouter as Router
+  BrowserRouter as Router
 } from 'react-router-dom'
 import { Provider } from 'mobx-react'
 import appState from './store/app-state'
 
-const root = document.getElementById('root');
+const root = document.getElementById('root')
 const render = (Component) => {
   ReactDOM.render(
-      <AppContainer>
-          <Provider appState={appState}>
-              <Router><Component /></Router>
-          </Provider>
-      </AppContainer>, root)
+    <AppContainer>
+      <Provider appState={appState}>
+        <Router><Component /></Router>
+      </Provider>
+    </AppContainer>, root)
 }
-render(App);
+render(App)
 
 if (module.hot) {
-    module.hot.accept('./App.jsx', () => {
+  module.hot.accept('./App.jsx', () => {
         const NextApp = require('./views/App.jsx').default  //eslint-disable-line
-        render(NextApp)
-    })
+    render(NextApp)
+  })
 }

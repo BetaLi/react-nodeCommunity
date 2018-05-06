@@ -13,7 +13,7 @@
     "extends": "standard",
   "rules": {
     "semi": [0],
-    "linebreak-style":"warn",
+    "linebreak-style":["warn", "windows"],
     "react/jsx-filename-extension":[0],
       "indent": [0],
       "import/extensions":"warn",
