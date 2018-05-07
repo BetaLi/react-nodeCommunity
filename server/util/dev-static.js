@@ -3,6 +3,7 @@ const path = require('path')
 const MemoryFs = require('memory-fs')
 const proxy = require('http-proxy-middleware')
 const ReactDomServer = require('react-dom/server')
+const bootstrap = require('react-async-bootstrapper')  // eslint-disable-line
 
 const webpack = require('webpack')
 const serverConfig = require('../../build/webpack.config.server')
@@ -18,7 +19,7 @@ const mfs = new MemoryFs()
 const serverCompiler = webpack(serverConfig)
 serverCompiler.outputFileSystem = mfs
 const Module = module.constructor
-let serverBundle
+let serverBundle, createStoreMap
 
 serverCompiler.watch({}, (err, state) => {
   if (err) throw err
@@ -35,7 +36,12 @@ serverCompiler.watch({}, (err, state) => {
   const m = new Module()
   m._compile(bundle, 'server-entry.js')
   serverBundle = m.exports.default
+  createStoreMap = m.exports.createStoreMap
 })
+
+const getStoreState = (stores) => {
+
+}
 
 module.exports = function (app) {
   app.use('/public', proxy({
@@ -43,9 +49,21 @@ module.exports = function (app) {
   }))
   app.get('*', (req, res) => {
     getTemplate().then(template => {
-      const content = ReactDomServer.renderToString(serverBundle)
-      template.replace('<app></app>', content)
-      res.send(template)
+
+      const routerContext = {}
+      const stores = createStoreMap()
+      const app = serverBundle(stores, routerContext, req.url)
+
+      bootstrap(app).then(() => {
+        if (routerContext.url) {
+          res.status(302).setHeader('Location', routerContext.url)
+          res.end()
+          return
+        }
+        console.log(stores.appState.count)
+        const content = ReactDomServer.renderToString(app)
+        res.send(template.replace('<app></app>', content))
+      })
     })
   })
 }

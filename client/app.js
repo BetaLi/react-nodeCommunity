@@ -6,13 +6,13 @@ import {
   BrowserRouter as Router
 } from 'react-router-dom'
 import { Provider } from 'mobx-react'
-import appState from './store/app-state'
+import AppState from './store/app-state'
 
 const root = document.getElementById('root')
 const render = (Component) => {
   ReactDOM.render(
     <AppContainer>
-      <Provider appState={appState}>
+      <Provider appState={new AppState()}>
         <Router><Component /></Router>
       </Provider>
     </AppContainer>, root)
