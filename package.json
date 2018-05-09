@@ -11,7 +11,8 @@
     "clear": "rimraf dist",
     "build": "npm run clear && npm run build:client && npm run build:server",
     "lint": "eslint --ext .js --ext .js client/",
-    "precommit": "npm run lint"
+    "precommit": "npm run lint",
+    "start": "cross-env NODE_ENV=production node server/server.js"
   },
   "author": "Lcoder",
   "license": "ISC",
@@ -20,6 +21,8 @@
     "babel-plugin-transform-decorators-legacy": "^1.3.4",
     "babel-preset-stage-1": "^6.24.1",
     "body-parser": "^1.18.2",
+    "ejs": "^2.6.1",
+    "ejs-compiled-loader": "^1.1.0",
     "express": "^4.16.2",
     "express-session": "^1.15.6",
     "mobx": "^4.2.0",
@@ -29,8 +32,10 @@
     "react": "^16.2.0",
     "react-async-bootstrapper": "^2.1.0",
     "react-dom": "^16.2.0",
+    "react-helmet": "^5.2.0",
     "react-router": "^4.2.0",
     "react-router-dom": "^4.2.2",
+    "serialize-javascript": "^1.5.0",
     "serve-favicon": "^2.4.5",
     "webpack": "^3.11.0"
   },

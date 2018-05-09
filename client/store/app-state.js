@@ -1,8 +1,12 @@
 import { observable, computed, autorun, action } from 'mobx'
 
 export default class AppState {
-    @observable count = 0;
-    @observable name = 'lcoder';
+  constructor ({count, name} = {count: 0, name: 'lcoder'}) {
+    this.count = count
+    this.name = name
+  }
+    @observable count
+    @observable name
     @computed get msg () {
         return `${this.name} say count is ${this.count}`
     }

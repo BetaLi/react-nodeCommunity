@@ -11,9 +11,9 @@
   },
 //  "extends": "airbnb",
     "extends": "standard",
-  "rules": {
+    "rules": {
     "semi": [0],
-    "linebreak-style":["warn", "windows"],
+    "linebreak-style":[0],
     "react/jsx-filename-extension":[0],
       "indent": [0],
       "import/extensions":"warn",

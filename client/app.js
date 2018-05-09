@@ -8,11 +8,13 @@ import {
 import { Provider } from 'mobx-react'
 import AppState from './store/app-state'
 
+const initialState = window.__INITIAL__STATE__ || {} //eslint-disable-line
+
 const root = document.getElementById('root')
 const render = (Component) => {
   ReactDOM.render(
     <AppContainer>
-      <Provider appState={new AppState()}>
+      <Provider appState={new AppState(initialState.appState)}>
         <Router><Component /></Router>
       </Provider>
     </AppContainer>, root)
