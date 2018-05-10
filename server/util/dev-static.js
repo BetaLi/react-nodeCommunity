@@ -6,7 +6,6 @@ const webpack = require('webpack')
 const serverConfig = require('../../build/webpack.config.server')
 const serverRender = require('./server-render')
 
-
 const getTemplate = () => {
   return new Promise((resolve, reject) => {
     axios('http://localhost:8888/public/server.ejs').then(res => {
